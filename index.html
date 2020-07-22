@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mini Vue</title>
+</head>
+<body>
+  <div id="app">
+    <h1>插值表达式</h1>
+    <h3>{{ msg }}</h3>
+    <h3>{{ count }}</h3>
+    <h1>v-text</h1>
+    <div v-text="msg"></div>
+    <h1>v-model</h1>
+    <input type="text" v-model="msg">
+    <input type="text" v-model="count">
+    <button v-on:click="handleChange">{{ btnName }}</button>
+    <div v-html="rawHtml"></div>
+  </div>
+  <script src="./js/dep.js"></script>
+  <script src="./js/watcher.js"></script>
+  <script src="./js/compiler.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        btnName: '模拟v-on',
+        msg: 'Hello Vue',
+        count: 100,
+        person: { name: 'zs' },
+        rawHtml: '<div style="color: red">这是一段真正的html插值</div>'
+      },
+      methods: {
+        handleChange: function(e){
+          console.log(e.target.tagName);
+          this.msg = 'Hello Vue, I have clicked';
+          this.btnName = this.btnName + ' I have clicked';
+        }
+      }
+    })
+    console.log(vm.msg)
+    // vm.msg = { test: 'Hello' }
+    vm.test = 'abc'
+  </script>
+</body>
+</html>
